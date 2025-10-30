@@ -1,11 +1,11 @@
 <template>
   <div class="flex min-h-screen">
     <Sidebar />
-    
+
     <div class="flex-1 flex flex-col">
       <Header :title="title" />
 
-      <main class="flex-1 p-6">
+      <main class="flex-1 p-6 bg-gray-100">
         <slot />
       </main>
 
