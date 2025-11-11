@@ -1,10 +1,13 @@
 <template>
-  <AppLayout title="Categories">
+  <AdminLayout title="Categories">
     <div class="p-8">
+      <!-- Header -->
       <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold">Category List</h1>
+        <h1 class="text-3xl font-bold text-gray-900">Category List</h1>
+
+        <!-- ✅ Correct admin route -->
         <Link
-          href="/categories/create"
+          :href="route('admin.categories.create')"
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           + Add Category
@@ -12,8 +15,9 @@
       </div>
 
       <!-- Sorting Controls -->
-      <div class="mb-4 flex space-x-3">
-        <label class="font-semibold">Sort By:</label>
+      <div class="mb-4 flex items-center space-x-3">
+        <label class="font-semibold text-gray-700">Sort By:</label>
+
         <select
           v-model="sortBy"
           class="border px-3 py-1 rounded"
@@ -33,14 +37,14 @@
         </select>
       </div>
 
-      <!-- Category Table -->
+      <!-- ✅ Category Table -->
       <div v-if="sortedCategories.length === 0" class="text-gray-500">
         No categories found.
       </div>
 
       <table
         v-else
-        class="table-auto w-full border-collapse border border-gray-300 text-left"
+        class="table-auto w-full border-collapse border border-gray-300 text-left bg-white rounded shadow-sm"
       >
         <thead>
           <tr class="bg-gray-100">
@@ -55,11 +59,13 @@
           <tr
             v-for="category in sortedCategories"
             :key="category.id"
-            class="hover:bg-gray-50"
+            class="hover:bg-gray-50 transition"
           >
             <td class="border px-4 py-2">{{ category.id }}</td>
-            <td class="border px-4 py-2">{{ category.name }}</td>
-            <td class="border px-4 py-2">{{ category.description ?? '-' }}</td>
+            <td class="border px-4 py-2 font-medium">{{ category.name }}</td>
+            <td class="border px-4 py-2">
+              {{ category.description || '-' }}
+            </td>
             <td class="border px-4 py-2">
               <span
                 :class="category.status ? 'text-green-600' : 'text-red-500'"
@@ -69,18 +75,19 @@
             </td>
             <td class="border px-4 py-2 text-center space-x-2">
               <Link
-                :href="`/categories/${category.id}/edit`"
-                class="text-blue-500 hover:underline"
+                :href="route('admin.categories.edit', category.id)"
+                class="text-blue-600 hover:underline"
               >
                 Edit
               </Link>
+
               <Link
                 as="button"
                 method="delete"
-                :href="`/categories/${category.id}`"
-                class="text-red-500 hover:underline"
+                :href="route('admin.categories.destroy', category.id)"
+                class="text-red-600 hover:underline"
                 preserve-scroll
-                @confirm="confirmDelete"
+                @click="confirmDelete"
               >
                 Delete
               </Link>
@@ -89,13 +96,14 @@
         </tbody>
       </table>
     </div>
-  </AppLayout>
+  </AdminLayout>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { Link } from '@inertiajs/vue3'
-import AppLayout from '@/Layouts/AppLayout.vue'
+import { route } from 'ziggy-js'
+import AdminLayout from '@/Layouts/AdminLayout.vue'
 
 const props = defineProps({
   categories: {
@@ -107,6 +115,7 @@ const props = defineProps({
 const sortBy = ref('id')
 const sortDirection = ref('asc')
 
+// ✅ Reactive sorting logic
 const sortedCategories = computed(() => {
   return [...props.categories].sort((a, b) => {
     const key = sortBy.value
@@ -120,7 +129,7 @@ const sortedCategories = computed(() => {
 })
 
 function sortCategories() {
-  // Sorting is reactive via computed, so no extra code needed
+  // Sorting happens automatically due to computed
 }
 
 function confirmDelete(e) {

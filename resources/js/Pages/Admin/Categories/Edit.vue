@@ -1,7 +1,7 @@
 <template>
-  <AppLayout title="Add Category">
+  <AdminLayout title="Edit Category">
     <div class="p-8 max-w-xl mx-auto">
-      <h1 class="text-2xl font-bold mb-6">Add New Category</h1>
+      <h1 class="text-2xl font-bold mb-6">Edit Category</h1>
 
       <!-- ✅ Success Message -->
       <div
@@ -23,7 +23,7 @@
             class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             :class="{ 'border-red-500': form.errors.name }"
             placeholder="Enter category name"
-            
+            required
           />
           <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
             {{ form.errors.name }}
@@ -62,12 +62,12 @@
             :disabled="form.processing"
             class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
           >
-            <span v-if="form.processing">Saving...</span>
-            <span v-else>Save</span>
+            <span v-if="form.processing">Updating...</span>
+            <span v-else>Update</span>
           </button>
 
           <Link
-            :href="route('categories.index')"
+            :href="route('admin.categories.index')"
             class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
           >
             Cancel
@@ -75,21 +75,28 @@
         </div>
       </form>
     </div>
-  </AppLayout>
+  </AdminLayout>
 </template>
 
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3'
-import AppLayout from '@/Layouts/AppLayout.vue'
+import AdminLayout from '@/Layouts/AdminLayout.vue' // ✅ use Admin layout
 import { route } from 'ziggy-js'
 
+const props = defineProps({
+  category: {
+    type: Object,
+    required: true
+  }
+})
+
 const form = useForm({
-  name: '',
-  description: '',
-  status: true,
+  name: props.category.name || '',
+  description: props.category.description || '',
+  status: props.category.status === 1 || props.category.status === true
 })
 
 function submit() {
-  form.post(route('categories.store'))
+  form.put(route('admin.categories.update', props.category.id))
 }
 </script>
