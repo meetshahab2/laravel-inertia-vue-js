@@ -36,6 +36,35 @@
       >
         📦 Products
       </Link>
+      <Link
+        :href="route('admin.patients.index')"
+        class="block px-3 py-2 rounded transition"
+        :class="isActive('admin.patients.*')
+          ? 'bg-gray-800 text-white font-semibold'
+          : 'text-gray-300 hover:bg-gray-800 hover:text-white'"
+      >
+        🧑‍⚕️ Patients
+      </Link>
+      <Link
+        :href="route('admin.departments.index')"
+        class="block px-3 py-2 rounded transition"
+        :class="isActive('admin.departments.*')
+          ? 'bg-gray-800 text-white font-semibold'
+          : 'text-gray-300 hover:bg-gray-800 hover:text-white'"
+      >
+        🏥 Departments
+      </Link>
+      <Link
+        :href="route('admin.specializations.index')"
+        class="block px-3 py-2 rounded transition"
+        :class="isActive('admin.specializations.*')
+          ? 'bg-gray-800 text-white font-semibold'
+          : 'text-gray-300 hover:bg-gray-800 hover:text-white'"
+      >
+        🧬 Specializations
+      </Link>
+
+
     </nav>
 
     <!-- Logout -->

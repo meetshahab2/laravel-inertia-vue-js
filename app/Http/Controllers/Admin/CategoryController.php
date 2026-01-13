@@ -58,9 +58,9 @@ class CategoryController extends Controller
     {
         $this->service->updateCategory($category, $request);
 
-        return redirect()
-            ->route('admin.categories.index')
-            ->with('success', 'Category updated successfully!');
+       return redirect()
+        ->route('admin.categories.index')
+        ->with('success', 'Category updated successfully!');
     }
 
     /** Delete category */

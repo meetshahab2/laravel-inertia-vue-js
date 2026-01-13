@@ -12,6 +12,11 @@
           Categories
         </Link>
       </li>
+      <li>
+        <Link href="/patients" class="block py-1 hover:text-gray-300">
+          Patients
+        </Link>
+      </li>
     </ul>
   </aside>
 </template>
