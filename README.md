@@ -1,6 +1,6 @@
 # Laravel Inertia Vue JS SPA
 
-This project integrates **Laravel 12**, **Inertia.js**, and **Vue 3** to build a **Single Page Application (SPA)** for inventory management, styled with **Tailwind CSS**.
+This project integrates **Laravel 12**, **Inertia.js**, and **Vue 3** to build a **Single Page Application (SPA)** for Hospital management, styled with **Tailwind CSS**.
 
 ---
 
