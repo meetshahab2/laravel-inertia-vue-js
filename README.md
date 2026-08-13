@@ -16,7 +16,7 @@ This project integrates **Laravel 12**, **Inertia.js**, and **Vue 3** to build a
 
   * **Vue 3**: Progressive JavaScript framework for building user interfaces.
   * **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
-  * **CRUD Operations**: Create, Read, Update, Delete inventory items.
+  * **CRUD Operations**: Create, Read, Update, Delete HMS items.
 
 ---
 
